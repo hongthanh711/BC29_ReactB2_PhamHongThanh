@@ -10,10 +10,6 @@ export default class Home extends Component {
     console.log(glass);
   };
 
-  renderVGlass = () => {
-    return <img className="img-fluid" src={this.glass.url} />;
-  };
-
   renderDataGlass = () => {
     const content = dataGlass.map((ele) => {
       return (

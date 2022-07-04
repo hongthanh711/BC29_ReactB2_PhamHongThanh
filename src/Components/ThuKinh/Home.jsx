@@ -3,11 +3,18 @@ import home from "./Home.module.css";
 import dataGlass from "./../../Data/dataGlasses.json";
 
 export default class Home extends Component {
+  state = {
+    selectedGlass: dataGlass[0],
+  };
+
   clickGlass = (id) => {
     const glass = dataGlass.find((item) => {
-      return (item.id = id);
+      return item.id === id;
     });
-    console.log(glass);
+
+    this.setState({
+      selectedGlass: glass,
+    });
   };
 
   renderDataGlass = () => {
@@ -33,19 +40,18 @@ export default class Home extends Component {
         <header>TRY GLASSES APP ONLINE</header>
         <div className="model d-flex justify-content-around">
           <div id={home.after}>
-            <img src=" ./glassesImage/model.jpg" className="img-fluid" />
+            <img src="./glassesImage/model.jpg" className="img-fluid" />
 
-            <div id={home.glassAvatar}></div>
+            <div id={home.glassAvatar}>
+              <img src={this.state.selectedGlass.url} alt="" />
+            </div>
             <div id={home.glassInfo}>
-              <h3>$chanel</h3>
-              <button class="btn btn-danger">$200</button>{" "}
-              <span class="text-success">Stocking</span>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Consequuntur eligendi nesciunt dicta quisquam velit voluptatem
-                fuga, tempora eaque ut nobis repellat cumque sint totam
-                voluptatum? Reprehenderit modi excepturi et dolores.
-              </p>
+              <h3>{this.state.selectedGlass.name}</h3>
+              <button className="btn btn-danger">
+                ${this.state.selectedGlass.price}
+              </button>
+              <span className="text-success">Stocking</span>
+              <p>{this.state.selectedGlass.desc}</p>
             </div>
           </div>
           <img src=" ./glassesImage/model.jpg" alt="" className="img-fluid" />

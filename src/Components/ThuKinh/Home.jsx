@@ -4,7 +4,8 @@ import dataGlass from "./../../Data/dataGlasses.json";
 
 export default class Home extends Component {
   state = {
-    selectedGlass: dataGlass[0],
+    selectedGlass: {},
+    displayInfo: false,
   };
 
   clickGlass = (id) => {
@@ -14,6 +15,7 @@ export default class Home extends Component {
 
     this.setState({
       selectedGlass: glass,
+      displayInfo: true,
     });
   };
 
@@ -40,21 +42,34 @@ export default class Home extends Component {
         <header>TRY GLASSES APP ONLINE</header>
         <div className="model d-flex justify-content-around">
           <div id={home.after}>
-            <img src="./glassesImage/model.jpg" className="img-fluid" />
+            <img
+              src="./glassesImage/model.jpg"
+              className={`${["img-fluid"]} ${home.anhModel}`}
+            />
 
             <div id={home.glassAvatar}>
-              <img src={this.state.selectedGlass.url} alt="" />
+              <img
+                src={this.state.selectedGlass.url}
+                alt=""
+                className="img-fluid"
+              />
             </div>
-            <div id={home.glassInfo}>
-              <h3>{this.state.selectedGlass.name}</h3>
-              <button className="btn btn-danger">
-                ${this.state.selectedGlass.price}
-              </button>
-              <span className="text-success">Stocking</span>
-              <p>{this.state.selectedGlass.desc}</p>
-            </div>
+            {this.state.displayInfo && (
+              <div id={home.glassInfo}>
+                <h3>{this.state.selectedGlass.name}</h3>
+                <button className="btn btn-danger">
+                  ${this.state.selectedGlass.price}
+                </button>
+                <span className="text-success">Stocking</span>
+                <p>{this.state.selectedGlass.desc}</p>
+              </div>
+            )}
           </div>
-          <img src=" ./glassesImage/model.jpg" alt="" className="img-fluid" />
+          <img
+            src=" ./glassesImage/model.jpg"
+            alt=""
+            className={`${["img-fluid"]} ${home.anhModel}`}
+          />
         </div>
         <div id="glass" className="row">
           {this.renderDataGlass()}
